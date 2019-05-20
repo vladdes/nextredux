@@ -4,8 +4,8 @@ import { startClock, serverRenderClock } from '../data/test/actions'
 import Examples from '../components/examples'
 
 
-class Index extends React.Component {
-  static getInitialProps ({ reduxStore, req }) {
+const Index = (props) => {
+  const getInitialProps =  ({ reduxStore, req }) =>  {
    
     const isServer = !!req
     reduxStore.dispatch(serverRenderClock(isServer))
@@ -13,18 +13,18 @@ class Index extends React.Component {
     return {}
   }
 
-  componentDidMount () {
-    const { dispatch } = this.props
-    this.timer = startClock(dispatch)
+  const componentDidMount = () => {
+    const { dispatch } = props
+    timer = startClock(dispatch)
   }
 
-  componentWillUnmount () {
-    clearInterval(this.timer)
+  const componentWillUnmount = () => {
+    clearInterval(timer)
   }
 
-  render () {
-    return <Examples />
-  }
+  
+  return <Examples />
+  
 }
 
 export default connect()(Index)
